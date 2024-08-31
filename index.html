@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to HTML Example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script>
+        // Your Markdown content
+        const markdown = `
+# Hello, Markdown!
+
+This is a **bold** text, and this is *italic*.
+
+## List Example
+- Item 1
+- Item 2
+- Item 3
+
+[Visit OpenAI](https://www.openai.com)
+        `;
+
+        // Convert Markdown to HTML
+        const htmlContent = marked(markdown);
+
+        // Insert the HTML into the page
+        document.getElementById('content').innerHTML = htmlContent;
+    </script>
+</body>
+</html>
