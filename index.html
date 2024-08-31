@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Styled Markdown to HTML Example</title>
+    <title>Markdown to HTML with LaTeX Example</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,42 +51,62 @@
             padding-left: 15px;
             color: #555;
         }
+        .katex-display {
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
     </style>
 </head>
 <body>
     <div id="content"></div>
 
     <script>
-        // Your Markdown content
+        // Your Markdown content with LaTeX
         const markdown = `
-# Welcome to Styled Markdown
+# Welcome to Markdown with LaTeX Support
 
-This is a **bold** text, and this is *italic*.
+This example shows how to include mathematical equations using LaTeX syntax.
+
+## Inline Math
+
+You can include inline math like this: $E = mc^2$
+
+## Display Math
+
+For more complex equations, you can use display math:
+
+$$
+\\frac{d}{dx}\\left( \\int_{0}^{x} f(u)\\,du\\right)=f(x)
+$$
+
+This is the fundamental theorem of calculus.
+
+## Maxwell's Equations
+
+Here's a more complex example showing Maxwell's Equations:
+
+$$
+\\begin{aligned}
+\\nabla \\cdot \\mathbf{E} &= \\frac{\\rho}{\\epsilon_0} \\\\
+\\nabla \\cdot \\mathbf{B} &= 0 \\\\
+\\nabla \\times \\mathbf{E} &= -\\frac{\\partial \\mathbf{B}}{\\partial t} \\\\
+\\nabla \\times \\mathbf{B} &= \\mu_0\\left(\\mathbf{J} + \\epsilon_0 \\frac{\\partial \\mathbf{E}}{\\partial t} \\right)
+\\end{aligned}
+$$
 
 ## Code Example
 
-Here's some inline \`code\`.
+Here's a Python function to calculate the factorial:
 
-And a code block:
-
-\`\`\`javascript
-function greet(name) {
-    console.log(\`Hello, \${name}!\`);
-}
-greet('World');
+\`\`\`python
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n-1)
 \`\`\`
 
-## List Example
-- Item 1
-- Item 2
-- Item 3
-
-## Blockquote Example
-
-> This is a blockquote.
-> It can span multiple lines.
-
-[Visit OpenAI](https://www.openai.com)
+[Learn more about LaTeX](https://www.latex-project.org/)
         `;
 
         // Convert Markdown to HTML
@@ -91,6 +114,15 @@ greet('World');
 
         // Insert the HTML into the page
         document.getElementById('content').innerHTML = htmlContent;
+
+        // Render LaTeX after inserting the HTML
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ],
+            throwOnError : false
+        });
     </script>
 </body>
 </html>
